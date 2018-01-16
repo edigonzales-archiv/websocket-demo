@@ -1,6 +1,10 @@
 package ch.so.agi.websocketdemo.controller;
 
 import ch.so.agi.websocketdemo.model.ChatMessage;
+import ch.so.agi.websocketdemo.model.ChatMessage.MessageType;
+
+import java.text.SimpleDateFormat;
+
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -25,4 +29,9 @@ public class ChatController {
         return chatMessage;
     }
 
+    @MessageMapping("/chat")
+    @SendTo("/topic/messages")
+    public ChatMessage send(@Payload ChatMessage chatMessage) throws Exception {
+    		return chatMessage;
+    }
 }
